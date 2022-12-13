@@ -1,12 +1,17 @@
+import { inject, injectable } from "tsyringe";
 import { Product } from "../../domain/entities/Product";
-import { ProductRepository } from "../../repositories/implementations/ProductRepository";
+import { IProductRepository } from "../../repositories/IProductRepository";
 
+@injectable()
 export class ListProducts{
-    private productRepository = new ProductRepository();
-    constructor(){}
+     
+    constructor(
+        @inject("ProductRepository")
+        private productRepository: IProductRepository
+    ){}
 
     async handle():Promise<Product[]>{
-        const all = this.productRepository.listAll();
+        const all = await this.productRepository.listAll();
         return all;
     }
 

@@ -1,9 +1,11 @@
+import 'reflect-metadata'
+import './di/container'
 import express from 'express'
 import ApiError from './middlewares/ApiError';
 
 import { routes } from './routes';
 const server = express();
-const port = 3333;
+const port = process.env.PORT ?? 3333;
 
 server.use(express.json());
 server.use(routes);

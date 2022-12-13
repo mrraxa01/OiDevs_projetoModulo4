@@ -1,17 +1,15 @@
 import { Request, Response } from "express";
-import { productsRoutes } from "../routes/products.routes";
 import { ProductDTO } from "../domain/dto/ProductDTO";
-import { Product } from "../domain/entities/Product";
-
 import { CreateProducts } from "../useCases/products/CreateProducts";
 import { ListProducts } from "../useCases/products/ListProducts";
+import { container } from "tsyringe";
 
 
 class ProductController{
     
     async listAllProducts(request: Request, response: Response): Promise<Response>{
-        const listProducts = new ListProducts();
-        const products = await listProducts.handle();
+        const useCase = container.resolve(ListProducts)
+        const products = await useCase.handle();
         console.log(products);
         return response.json(products);
 
@@ -19,10 +17,10 @@ class ProductController{
     }
 
     async createProduct(request: Request, response: Response): Promise<Response>{
-        const createProduct = new CreateProducts();
+        const useCase = container.resolve(CreateProducts);
         const {description, price, stock} = request.body;
             
-        const product = await createProduct.handle(new ProductDTO(description, parseFloat(price), parseInt(stock)));
+        const product = await useCase.handle(new ProductDTO(description, parseFloat(price), parseInt(stock)));
         return response.status(201).json(product).send();
     }
 }
