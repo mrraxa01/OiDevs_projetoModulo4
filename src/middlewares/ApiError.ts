@@ -10,8 +10,9 @@ export default function ApiError (
     request: Request, 
     response: Response, 
     next: NextFunction){
-
-      
-
-        return response.json("Ocorreu um erro!")
+    
+      const id = request.params;
+        
+        
+        return response.json("Ocorreu um erro! Erros:" + err.message + id  )
 }
