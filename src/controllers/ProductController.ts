@@ -7,20 +7,19 @@ import { container } from "tsyringe";
 
 class ProductController{
     
-    async listAllProducts(request: Request, response: Response): Promise<Response>{
+    async listAll(request: Request, response: Response): Promise<Response>{
         const useCase = container.resolve(ListProducts)
         const products = await useCase.handle();
-        console.log(products);
-        return response.json(products);
+       return response.json(products);
 
 
     }
-
-    async createProduct(request: Request, response: Response): Promise<Response>{
+    // Request<{route params},{response body},{parametro generico}>, abaixo vamos ignorar os 2 primeiros,
+    // e selecionar apenas o DTO
+    async create(request: Request<{}, {}, ProductDTO>, response: Response): Promise<Response>{
         const useCase = container.resolve(CreateProducts);
-        const {description, price, stock} = request.body;
-            
-        const product = await useCase.handle(new ProductDTO(description, parseFloat(price), parseInt(stock)));
+        const productToSave = request.body;
+        const product = await useCase.handle(productToSave);
         return response.status(201).json(product).send();
     }
 }

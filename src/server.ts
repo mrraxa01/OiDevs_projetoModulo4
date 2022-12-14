@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import './di/container'
+import 'express-async-errors';
 import express from 'express'
 import ApiError from './middlewares/ApiError';
 

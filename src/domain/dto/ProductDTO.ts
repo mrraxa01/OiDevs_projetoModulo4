@@ -1,3 +1,5 @@
+import { parse } from "uuid";
+
 export class ProductDTO{
 description: string;
 price: number;
