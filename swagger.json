@@ -1,0 +1,217 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+        "title": "#OiDevs - Projeto Final - Módulo 4",
+        "description": "API Node.js com clientes, produtos e compra",
+        "version": "1.0.0",
+        "contact":{
+            "email":"mrraxa01@gmail.com"
+        }
+    },
+        "paths": {
+            "/products": {
+                "post": {
+                    "tags": [
+                        "Products"
+                ],
+                "sumary": "Create a Products",
+                "description": "Create a new Product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "$ref": "#/definitions/Product"
+                            },
+                            "example": {
+                                "description": "product description sample",
+                                "price": 49,
+                                "stock":100
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{ 
+                        "description": "Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/definitions/Product"
+                                }
+
+                            }
+
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+                }
+            },
+            "get":{
+                "tags": [
+                    "Products"
+                ],
+                "sumary": "List All Products",
+                "description": "Get all products",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "array",
+                                    "items":{
+                                        "tpye":"object",
+                                        "properties":{
+                                            "description":{
+                                                "type":"string"
+                                            },
+                                            "price":{
+                                                "type":"number"
+                                            },
+                                            "stock":{
+                                                "type":"number"
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        
+                    },
+                    "500": {
+                        "description": "Bad Request!"
+                    }
+                }
+            }
+
+        },
+        "/products/{id}":{
+            "get":{
+                "tags":[
+                    "Products"
+                ],
+                "sumary":"Find Product",
+                "description": "Find Product by Id",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Id for find product",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses":{
+                    "200":{ 
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/definitions/Product"
+                                }
+
+                            }
+
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "Products"
+                ],
+                "sumary":"Delete Product",
+                "description": "Delete product for id",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Id for find product",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "$ref": "#/definitions/Product"
+                            },
+                            "example": {
+                                "description": "product description sample",
+                                "price": 49,
+                                "stock":100
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{ 
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/definitions/Product"
+                                }
+
+                            }
+
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+                }
+
+            },
+            "delete":{
+                "tags":[
+                    "Products"
+                ],
+                "sumary":"Delete Product",
+                "description": "Delete product for id",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Id for find product",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses":{
+                    "204":{
+                        "description": "No content"
+                    },
+                    "404":{
+                        "description": "Product Not Found"
+                    }
+                }
+    
+            }  
+        }
+    },
+    "definitions":{
+        "Product":{
+            "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "number"
+                    },
+                    "stock": {
+                        "type":"number"
+                        }   
+                    }
+        }
+    }
+}

@@ -18,7 +18,6 @@ export class DeleteProduct{
         return "Delete Success!"
     }
 
-
     private async checkIfProductExist(id: string): Promise<boolean>{
         const existingProduct = await this.productRepository.findById(id);
         const productExist = !!existingProduct;
