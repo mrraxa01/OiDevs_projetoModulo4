@@ -89,7 +89,8 @@
             }
 
         },
-        "/products/{id}":{
+          
+          "/products/{id}":{
             "get":{
                 "tags":[
                     "Products"
@@ -196,8 +197,164 @@
                 }
     
             }  
+        },
+        "/customers":{
+            "post":{
+                "tags":[
+                    "Customers"
+                ],
+                "sumary":"Create Customer",
+                "description": "Create a new Customer",
+                "requestBody":{
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "$ref": "#/definitions/Customer"
+                            },
+                            "example": {
+                                "name": "name the customer",
+                                "password":"password min 6 characters"
+                               
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{ 
+                        "description": "Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/definitions/Customer"
+                                }
+
+                            }
+
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+
+                }   
+            },
+            "get":{
+                "tags":[
+                    "Customers"
+                ],
+                "sumary":"Get All Customer",
+                "description": "Return all customers",
+                "responses":{
+                    "200":{
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "$ref":"#/definitions/Customer"
+                            }
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+                }
+
+            }
+        },
+        "/customers/{id}": {
+            "get":{
+                "tags":[
+                    "Customers"
+                ],
+                "sumary":"Find Customer",
+                "description": "Find Customer by Id",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Id for find customer",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses":{
+                    "200":{ 
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/definitions/Customer"
+                                }
+
+                            }
+
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+                }
+            },
+            "put":{
+                "tags":[
+                    "Customers"
+                ],
+                "sumary":"Update Customer",
+                "description": "Update Customer by Id",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Id for find customer",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses":{
+                    "200":{ 
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref": "#/definitions/Customer"
+                                }
+
+                            }
+
+                        }
+                    },
+                    "500":{
+                        "description":"Bad Request!"
+                    }
+                }
+            },
+            "delete":{
+                "tags":[
+                    "Customers"
+                ],
+                "sumary":"Delete Customer",
+                "description": "Delete customer for id",
+                "parameters": [
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "description":"Id for find customer",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses":{
+                    "204":{
+                        "description": "No content"
+                    },
+                    "404":{
+                        "description": "Customer Not Found"
+                    }
+                }
+    
+            }  
         }
     },
+
     "definitions":{
         "Product":{
             "type": "object",
@@ -212,6 +369,17 @@
                         "type":"number"
                         }   
                     }
+        },
+        "Customer":{
+            "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "password":{
+                        "type":"string"
+                    }
+                }
         }
     }
 }
