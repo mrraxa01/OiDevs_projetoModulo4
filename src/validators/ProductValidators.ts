@@ -2,7 +2,7 @@ import {body, param } from "express-validator"
 
 export const productIdValidation = [
    
-    param("id").notEmpty().withMessage("ID is required!").withMessage("ID is required!"),
+    param("id").notEmpty().isLength({min:10}).withMessage("Valid ID is required!"),
 ];
 
 export const createProductValidations = [
