@@ -50,7 +50,7 @@ class ProductController{
         const useCase = container.resolve(DeleteProduct);
         const {id} = request.params;
         const result = await useCase.handle(id);
-        return response.status(204).json(result);
+        return response.status(204).json(result).send();
     }
 }
 export {ProductController}

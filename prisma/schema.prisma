@@ -17,3 +17,9 @@ model Product {
   stock Int
 
 }
+
+model Customer {
+  id String @id
+  name String
+  password String
+}

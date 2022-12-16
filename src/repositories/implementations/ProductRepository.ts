@@ -6,7 +6,7 @@ import { Product } from "../../domain/entities/Product";
 import { productIdValidation } from "../../validators/ProductValidators";
 import { IProductRepository } from "../IProductRepository";
 
-const prisma = new PrismaClient();
+//const prisma = new PrismaClient();
 
 @injectable()
 class ProductRepository implements IProductRepository {
@@ -48,6 +48,8 @@ class ProductRepository implements IProductRepository {
       });
       return updatedProduct;
    }
+
+   
    async delete(id: string): Promise<void> {
      
       await this.prisma.product.delete({
