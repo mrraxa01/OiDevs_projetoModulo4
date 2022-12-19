@@ -5,6 +5,12 @@ interface IApiError{
     message: string;
 }
 
+interface IRelatedError{
+  name: string;
+  message: string;
+  stack: string;
+}
+
 export default function ApiError (
     err: Error, 
     request: Request, 
@@ -14,5 +20,5 @@ export default function ApiError (
       const id = request.params;
         
         
-        return response.json("Ocorreu um erro! Erros:" + err.message + id  )
+        return response.json("Ocorreu um erro! Erro(s)" + err.message  + err.name + err.stack )
 }
