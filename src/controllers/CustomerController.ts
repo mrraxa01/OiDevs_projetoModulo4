@@ -1,14 +1,19 @@
 import { request, Request, response, Response } from "express";
 import { container } from "tsyringe";
 import { CustomerDTO } from "../domain/dto/CustomerDTO";
-import { Customer } from "../domain/entities/Customers";
+import { Customer } from "@prisma/client";
 import { CreateCustumer } from "../useCases/customers/CreateCustomer";
 import { DeleteCustomer } from "../useCases/customers/DeleteCustomer";
 import { FindById } from "../useCases/customers/FindById";
 import { ListCustomers } from "../useCases/customers/ListCustomers";
 import { UpdateCustomer } from "../useCases/customers/UpdateCustomer";
 
+
+
 class CustomerController{
+
+    private userLogged: Customer; 
+
 
     async listAll(request: Request, response: Response ):Promise<Response>{
         const useCase = container.resolve(ListCustomers);
@@ -28,7 +33,7 @@ class CustomerController{
             const useCase = container.resolve(CreateCustumer);
             const customerToSave = request.body;
             const customer = await useCase.handle(customerToSave);
-
+            this.setUserLogged(customer);
         return response.status(201).json(customer).send();
     }
 
@@ -50,6 +55,13 @@ class CustomerController{
         const result = await useCase.handle(id);
         return response.status(204).json("Delete Success!");
     }
+
+       
+
+    private setUserLogged(customer: Customer){
+        this.userLogged = customer;
+    }
+    
 
 }
 export {CustomerController}

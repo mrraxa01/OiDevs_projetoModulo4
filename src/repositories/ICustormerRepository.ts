@@ -1,5 +1,5 @@
 import { CustomerDTO } from "../domain/dto/CustomerDTO";
-import { Customer } from "../domain/entities/Customers";
+import { Customer } from "@prisma/client";
 
 interface ICostumerRepository{
     create(customer:CustomerDTO):Promise<Customer>;

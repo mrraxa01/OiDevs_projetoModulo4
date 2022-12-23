@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
 import { v4 } from "uuid";
 import { CustomerDTO } from "../../domain/dto/CustomerDTO";
-import { Customer } from "../../domain/entities/Customers";
+import { Customer } from "@prisma/client";
 import { ICostumerRepository } from "../ICustormerRepository";
 
 @injectable()

@@ -1,10 +1,10 @@
-import { Customer } from "../entities/Customers";
-import { Product } from "../entities/Product";
+
+import { Product } from "@prisma/client";
 
 export class ShoppingCartDTO{
-    private id: string;
-    private customer: Customer;
-    private products: Product[];
-
-
+     id: string;
+     product: Product;
+     qtd: number
+    
+    
 }

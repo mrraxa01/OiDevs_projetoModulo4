@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { ShoppingCartController } from "../controllers/ShoppingCartController";
-//import { addProduct, getTotalValue, removeProduct, showItems } from "../controllers/ShoppingCartController";
 
 
 const shoppingCartRoutes = Router();
@@ -10,6 +9,7 @@ shoppingCartRoutes.post("/", shoppingCarController.addProduct.bind(shoppingCarCo
 shoppingCartRoutes.delete("/:id", shoppingCarController.removeProduct.bind(shoppingCarController));
 shoppingCartRoutes.get("/", shoppingCarController.showItems.bind(shoppingCarController));
 shoppingCartRoutes.get("/totalValue", shoppingCarController.getTotalValue.bind(shoppingCarController));
+shoppingCartRoutes.post("/checkout/:id",shoppingCarController.checkout.bind(shoppingCarController));
 
 export {shoppingCartRoutes}
 

@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { Product } from "../../domain/entities/Product";
+import { Product } from "@prisma/client";
 import { IProductRepository } from "../../repositories/IProductRepository";
 
 @injectable()

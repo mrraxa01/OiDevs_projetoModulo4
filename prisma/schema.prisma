@@ -15,11 +15,31 @@ model Product {
   description String
   price Float
   stock Int
-
+  items ShoppingCartItems[]
 }
 
 model Customer {
   id String @id
   name String
   password String
+  carts ShoppingCart[]
+  
 }
+
+model ShoppingCart {
+  id String @id
+  customerId String 
+  customer Customer? @relation(fields: [customerId], references: [id])
+  totalValue Decimal
+  items ShoppingCartItems[]
+}
+
+model ShoppingCartItems {
+  id Int @id @default(autoincrement())
+  shoppingCartId String
+  shoppingCart ShoppingCart @relation(fields: [shoppingCartId], references: [id])
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  qtd Int
+  unitValue Decimal
+  }
